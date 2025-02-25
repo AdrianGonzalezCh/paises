@@ -10,9 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PaisesServiceImpl implements PaisesService {
-    
-    @Autowired 
-    private PaisesDao paisesDao;
+
+    private final PaisesDao paisesDao;
+
+    @Autowired
+    public PaisesServiceImpl(PaisesDao paisesDao) {
+        this.paisesDao = paisesDao;
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -20,16 +24,19 @@ public class PaisesServiceImpl implements PaisesService {
         return paisesDao.findAll();
     }
 
+    @Override
     @Transactional(readOnly = true)
     public Paises getPais(Paises pais) {
-        return paisesDao.findById(pais.getIdPais()).orElse(null);
+        return paisesDao.findById(pais.getIdPais().longValue()).orElse(null);
     }
 
+    @Override
     @Transactional
     public void save(Paises pais) {
         paisesDao.save(pais);
     }
 
+    @Override
     @Transactional
     public void delete(Paises pais) {
         paisesDao.delete(pais);

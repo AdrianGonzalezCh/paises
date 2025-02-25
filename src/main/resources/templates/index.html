@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<!--Mi primera pagina del curso
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
   <head th:replace="~{layout/plantilla :: head}">
-        <title>Semana 07 Grupo #14</title>
-    </head>
-    <body>
-        <header th:replace="~{layout/plantilla :: header}"/>
-        <h2>Bienvenidos, por favor seleccione el boton Países para ingresar</h2>
-        
-        <footer th:replace="~{layout/plantilla :: footer}"/>
-    </body>
+      <title>Semana 06 Grupo #14</title>
+  </head>
+  <body>
+      <header th:replace="~{layout/plantilla :: header}"></header>
+      
+      <h2>Bienvenidos, por favor seleccione el botón Ver Países para ingresar</h2>
+      <h3>Practica 03: Desarrolo con Hibernate</h3>
+      <h4>Grupo #14</h4>
+      <div>
+          <a th:href="@{/pais/listado}" class="btn btn-primary">Ver Países</a>
+      </div>
+      
+      <footer th:replace="~{layout/plantilla :: footer}"></footer>
+  </body>
 </html>

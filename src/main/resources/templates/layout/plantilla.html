@@ -4,15 +4,18 @@
     <head th:fragment="head">
         <title>Lista de Países Grupo14</title>
         <meta charset="UTF-8"/>
+        
+        <!-- Bootstrap, Font Awesome y jQuery desde WebJars (ajustar versiones si es necesario) -->
         <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
         <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
         <script th:src="@{/js/rutinas.js}"></script>
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>        
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
-<body>
-       <header th:fragment="header" class="header">
+    <body>
+        <!-- HEADER -->
+        <header th:fragment="header" class="header">
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
                 <div class="container">
                     <a th:href="@{/}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
@@ -21,7 +24,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <ul class="navbar-nav">
-                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/pais/listado}">[[#{plantilla.paises}]]</a></li>
+                            <!-- Botón de Países (opcional) -->
                         </ul>
                     </div>
                 </div>
@@ -37,14 +40,15 @@
             </section>
         </header>
 
-       <footer th:fragment="footer" class="bg-info text-white mt-5 p-2">
+        <!-- FOOTER -->
+        <footer th:fragment="footer" class="bg-info text-white mt-5 p-2">
             <div class="container">
                 <div class="col">
                     <p class="lead text-center">
-                        &COPY [[#{plantilla.derechos}]]
+                        &COPY; [[#{plantilla.derechos}]]
                     </p>
                 </div>
             </div>
         </footer>
-   </body>
+    </body>
 </html>

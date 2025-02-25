@@ -3,50 +3,56 @@ package com.paises.paises.controller;
 import com.paises.paises.domain.Paises;
 import com.paises.paises.service.PaisesService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
-@RequestMapping("/paises")
+@RequestMapping("/pais")  // Asegurar que coincida con la URL base
 public class PaisesController {
-    
-    @Autowired
-    private PaisesService paisesService;
+
+    private final PaisesService paisesService;
+
+    public PaisesController(PaisesService paisesService) {
+        this.paisesService = paisesService;
+    }
 
     @GetMapping("/listado")
-    public String listado(Model model) {
-        var paises = paisesService.getPaises();
-        model.addAttribute("paises", paises);
-        model.addAttribute("totalPaises", paises.size());
-        return "/paises/listado";
-    }
-    
+public String listarPaises(Model model) {
+    var paises = paisesService.getPaises();
+    model.addAttribute("paises", paises);
+    model.addAttribute("totalPaises", paises.size());
+    // Agregar un objeto 'pais' vacío para el formulario del modal
+    model.addAttribute("pais", new Paises());
+    return "pais/listado";
+}
     @GetMapping("/nuevo")
-    public String paisesNuevo(Paises pais) {
-        return "/paises/modifica";
+    public String nuevoPais(Model model) {
+        model.addAttribute("pais", new Paises());
+        return "pais/formulario";  // Vista para crear un nuevo país
     }
 
     @PostMapping("/guardar")
-    public String guardar(Paises pais) {        
+    public String guardarPais(@ModelAttribute Paises pais) {
         paisesService.save(pais);
-        return "redirect:/paises/listado";
+        return "redirect:/pais/listado";
     }
 
     @GetMapping("/eliminar/{idPais}")
-    public String eliminar(Paises pais) {
+    public String eliminarPais(@PathVariable("idPais") Integer idPais) {
+        Paises pais = new Paises();
+        pais.setIdPais(idPais);
         paisesService.delete(pais);
-        return "redirect:/paises/listado";
+        return "redirect:/pais/listado";
     }
 
-    @GetMapping("/modificar/{idPais}")
-    public String modificar(Paises pais, Model model) {
+    @GetMapping("/editar/{idPais}")
+    public String editarPais(@PathVariable("idPais") Integer idPais, Model model) {
+        Paises pais = new Paises();
+        pais.setIdPais(idPais);
         pais = paisesService.getPais(pais);
         model.addAttribute("pais", pais);
-        return "/paises/modifica";
+        return "pais/formulario";  // Vista para editar un país existente
     }
 }
